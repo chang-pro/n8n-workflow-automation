@@ -2,22 +2,34 @@
 
 ![n8n](https://img.shields.io/badge/n8n-Self_Hosted-EA4B71?style=flat-square&logo=n8n&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Webhooks](https://img.shields.io/badge/Apollo-Webhooks-5539CC?style=flat-square)
+![Apollo](https://img.shields.io/badge/Apollo.io-Webhooks-5539CC?style=flat-square)
 ![Repo](https://img.shields.io/badge/Source-Private-orange?style=flat-square)
 
-**A self-hosted n8n workflow automation instance with custom integrations for Apollo webhooks, lead enrichment, and business process automation.**
+**My self-hosted n8n instance running custom automation workflows — primarily Apollo.io webhook pipelines for lead enrichment and outreach.**
 
 ---
 
-## What It Does
+## Why Self-Hosted
 
-Self-hosted n8n deployment with custom workflow templates for automating business processes — primarily lead enrichment and outreach pipelines via Apollo webhook integrations.
+I needed automation that I fully control — no rate limits from Zapier, no per-task pricing, no vendor lock-in. Self-hosted n8n on Docker gives me unlimited executions and full control over my data and integrations.
 
-## Key Workflows
+## What I Built
 
-- **Apollo Webhook Receiver** — Catches Apollo.io events and routes enriched lead data into downstream systems
-- **Lead Enrichment Pipeline** — Processes incoming leads with data validation, deduplication, and CRM routing
-- **Notification Automations** — Alerts and status updates triggered by workflow events
+### Apollo.io Webhook Pipeline
+- **Catches Apollo.io webhook events** when new leads are enriched or sequences trigger
+- Routes lead data through validation, deduplication, and enrichment steps
+- Pushes qualified leads into my CRM (Ringora) and outreach queues
+- Handles different lead types with branching logic (job leads vs. client leads)
+
+### Lead Enrichment Workflows
+- Incoming leads are validated, deduped against existing contacts, and enriched with additional data
+- Automated tagging and scoring based on lead source and quality signals
+- Failed enrichments are flagged and queued for manual review
+
+### Notification Automations
+- Workflow status alerts for monitoring pipeline health
+- Error notifications when integrations fail or data quality drops
+- Daily summary of leads processed and pipeline throughput
 
 ## Infrastructure
 
@@ -31,32 +43,22 @@ Self-hosted n8n deployment with custom workflow templates for automating busines
 │  └──────────────┬───────────────────┘  │
 │                 │                       │
 │  ┌──────────────┴───────────────────┐  │
-│  │         n8n_data Volume           │  │
-│  │    Workflows, Credentials, Logs   │  │
+│  │       Persistent Volume           │  │
+│  │  Workflows │ Credentials │ Logs   │  │
 │  └──────────────────────────────────┘  │
 └────────────────────────────────────────┘
           │              │
           ▼              ▼
    ┌────────────┐  ┌──────────┐
-   │  Apollo.io │  │ External │
-   │  Webhooks  │  │ Services │
+   │ Apollo.io  │  │  Ringora │
+   │ Webhooks   │  │  CRM     │
    └────────────┘  └──────────┘
 ```
 
 ## Tech Stack
 
-- **Automation:** n8n (self-hosted)
-- **Infrastructure:** Docker, Docker Compose
-- **Integrations:** Apollo.io webhooks, custom APIs
-- **Data:** Persistent volume for workflows and credentials
-
-## Skills Demonstrated
-
-- Self-hosted infrastructure management with Docker
-- Workflow automation design and webhook integrations
-- API integration with third-party services (Apollo.io)
-- DevOps and containerized deployment
+`n8n (self-hosted)` · `Docker Compose` · `Apollo.io webhooks` · `REST APIs`
 
 ---
 
-> *This is a showcase page for a private repository. Source code available upon request for verified opportunities.*
+> *My workflow configurations. Reach out if you want to see the specific workflow designs.*
